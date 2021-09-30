@@ -4,6 +4,7 @@ import com.lyricchan.arknights.page.service.PageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Lyric
  * @since 2021-09-30
  */
+@Controller
 @RequestMapping("/page")
 public class PageController {
 
@@ -27,10 +29,14 @@ public class PageController {
     }
 
     /**
-     * 跳你妈
-     * @param folder
-     * @param name
-     * @return
+     * <p>通用的跳你妈功能</p>
+     * <ul>
+     *     <li>/-/xxx ~ 跳到templates/目录下的页面</li>
+     *     <li>/yyy/xxx ~ 跳到templates/yyy/目录下的页面</li>
+     * </ul>
+     * @param folder 路径
+     * @param name 文件名
+     * @return mav
      */
     @GetMapping(value = "/{folder}/{name}")
     public ModelAndView toPage(@PathVariable("folder") String folder, @PathVariable("name") String name) {
