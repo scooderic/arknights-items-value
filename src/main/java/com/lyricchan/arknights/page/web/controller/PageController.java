@@ -19,8 +19,12 @@ public class PageController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
     private PageService pageService;
+
+    @Autowired
+    public PageController(PageService pageService) {
+        this.pageService = pageService;
+    }
 
     /**
      * 跳你妈

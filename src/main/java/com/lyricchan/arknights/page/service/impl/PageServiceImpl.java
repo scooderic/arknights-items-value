@@ -3,7 +3,7 @@ package com.lyricchan.arknights.page.service.impl;
 import com.lyricchan.arknights.page.service.PageService;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("pageService")
 public class PageServiceImpl implements PageService {
 
     @Override
