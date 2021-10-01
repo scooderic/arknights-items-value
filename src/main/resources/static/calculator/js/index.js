@@ -13,6 +13,12 @@
         context.errorAlert = function () {
             context.alert("系统错误");
         };
+        context.disable = function (control) {
+            control.prop("disabled", true);
+        };
+        context.enable = function (control) {
+            control.prop("disabled", false);
+        };
         // 加载所有的价值
         context.loadAllPrices = function () {
             $.ajax({
@@ -39,7 +45,109 @@
                 }
             });
         };
+        // 计算T1、T2、T4物品价值（仅根据用户输入）
+        // 修正值是考虑龙门币的参与后的约数值
+        context.calcT1T2T4 = function () {
+            // 取T3物品价值
+            var nzct3 = parseFloat($("#input_nzct3").val());
+            var qmkt3 = parseFloat($("#input_qmkt3").val());
+            var ymst3 = parseFloat($("#input_ymst3").val());
+            var rma7012t3 = parseFloat($("#input_rma7012t3").val());
+            var gyyzt3 = parseFloat($("#input_gyyzt3").val());
+            var qxzzt3 = parseFloat($("#input_qxzzt3").val());
+            var jszzt3 = parseFloat($("#input_jszzt3").val());
+            var tzt3 = parseFloat($("#input_tzt3").val());
+            var ytzt3 = parseFloat($("#input_ytzt3").val());
+            var tnjzt3 = parseFloat($("#input_tnjzt3").val());
+            var njt3 = parseFloat($("#input_njt3").val());
+            var chjt3 = parseFloat($("#input_chjt3").val());
+            var jtyjt3 = parseFloat($("#input_jtyjt3").val());
+            var bzrrjt3 = parseFloat($("#input_bzrrjt3").val());
+            var hhqxyt3 = parseFloat($("#input_hhqxyt3").val());
+            // 算T4（基于T3修正：1.03）
+            var t4fix = 1.03;
+            $("#input_bmct4").val(Number(t4fix * (nzct3 + tzt3 + rma7012t3)).toFixed(1));
+            $("#input_ssmkt4").val(Number(t4fix * (2 * qmkt3 + jszzt3 + nzct3)).toFixed(1));
+            $("#input_wsymst4").val(Number(t4fix * (ymst3 + ytzt3 + qxzzt3)).toFixed(1));
+            $("#input_rma7024t4").val(Number(t4fix * (rma7012t3 + 2 * gyyzt3 + tnjzt3)).toFixed(1));
+            $("#input_tcyyt4").val(Number(t4fix * (4 * gyyzt3)).toFixed(1));
+            $("#input_glzzt4").val(Number(t4fix * (qxzzt3 + 2 * gyyzt3 + ymst3)).toFixed(1));
+            $("#input_jszkt4").val(Number(t4fix * (2 * jszzt3 + tnjzt3 + nzct3)).toFixed(1));
+            $("#input_tjkt4").val(Number(t4fix * (2 * tzt3 + ytzt3 + qmkt3)).toFixed(1));
+            $("#input_ytkt4").val(Number(t4fix * (2 * ytzt3 + qxzzt3 + jszzt3)).toFixed(1));
+            $("#input_tzlt4").val(Number(t4fix * (2 * tnjzt3 + tzt3 + qmkt3)).toFixed(1));
+            $("#input_jhnjt4").val(Number(t4fix * (ytzt3 + njt3 + chjt3)).toFixed(1));
+            $("#input_chjkt4").val(Number(t4fix * (qxzzt3 + ymst3 + chjt3)).toFixed(1));
+            $("#input_jtdlt4").val(Number(t4fix * (2 * jtyjt3 + njt3 + chjt3)).toFixed(1));
+            $("#input_jlrjt4").val(Number(t4fix * (bzrrjt3 + hhqxyt3 + njt3)).toFixed(1));
+            $("#input_qxyyt4").val(Number(t4fix * (hhqxyt3 + jtyjt3 + rma7012t3)).toFixed(1));
+            // 算T2（基于T3修正：0.96）
+            var t2fix = 0.96;
+            $("#input_gyyt2").val(Number(t2fix * gyyzt3 / 5).toFixed(1));
+            $("#input_zzt2").val(Number(t2fix * qxzzt3 / 4).toFixed(1));
+            $("#input_jszt2").val(Number(t2fix * jszzt3 / 4).toFixed(1));
+            $("#input_tt2").val(Number(t2fix * tzt3 / 4).toFixed(1));
+            $("#input_ytt2").val(Number(t2fix * ytzt3 / 4).toFixed(1));
+            $("#input_tnjt2").val(Number(t2fix * tnjzt3 / 4).toFixed(1));
+            // 算T1（基于T3修正：0.9024）
+            var t1fix = 0.96 * 0.94;
+            $("#input_yyt1").val(Number(t1fix * gyyzt3 / 15).toFixed(1));
+            $("#input_pszzt1").val(Number(t1fix * qxzzt3 / 12).toFixed(1));
+            $("#input_zylt1").val(Number(t1fix * jszzt3 / 12).toFixed(1));
+            $("#input_dtt1").val(Number(t1fix * tzt3 / 12).toFixed(1));
+            $("#input_ytspt1").val(Number(t1fix * ytzt3 / 12).toFixed(1));
+            $("#input_stt1").val(Number(t1fix * tnjzt3 / 12).toFixed(1));
+        };
+        // 提交运算，并渲染结果
+        context.getFullReport = function (control, data) {
+            console.log("data:");
+            console.log(data);
+            $("#tbody_report").empty();
+            $.ajax({
+                "url": "/calculator/getFullReport",
+                "method": "POST",
+                "data": data,
+                "async": true,
+                "dataType": "json",
+                "success": function (resp) {
+                    var tbody = $("#tbody_report");
+                    if (resp) {
+                        for (var i0 = 0; i0 < resp.length; i0 ++) {
+                            var report = resp[i0];
+                            var row = "<tr><th scope=\"row\">" + (i0 + 1) + "</th><td>" + report["stageName"] + "</td><td>" + report["mainItemName"] + "</td><td>" + Number(report["totalValue"]).toFixed(1) + "</td></tr>";
+                            tbody.append(row);
+                        }
+                    } else {
+                        context.alert("数据加载失败");
+                    }
+                },
+                "error": function () {
+                    context.errorAlert();
+                },
+                "complete": function () {
+                    context.enable(control);
+                }
+            });
+        };
         // ++++++++++++++++++++++++++++++++ CONTEXT执行区 ++++++++++++++++++++++++++++++++
         context.loadAllPrices();
+        // ++++++++++++++++++++++++++++++++ CONTEXT事件区 ++++++++++++++++++++++++++++++++
+        // 刷新
+        $("#button_refresh").on("click", function () {
+            context.calcT1T2T4();
+        });
+        // 提交
+        $("#button_submit").on("click", function () {
+            var control = $(this);
+            context.disable(control);
+            context.calcT1T2T4();
+            var inputList = $("#form_price").find(".input_price");
+            var data = {};
+            for (var j = 0; j < inputList.length; j ++) {
+                var inputDom = $(inputList[j]);
+                data[inputDom.data("itemid")] = inputDom.val();
+            }
+            context.getFullReport(control, data);
+        });
     });
 })(jQuery);
