@@ -9,73 +9,210 @@
     <script type="text/javascript" src="/static/calculator/js/index.js"></script>
 </head>
 <body class="container">
+<!-- 占位块 -->
+<div class="row g-3 mb-3">
+    <div class="col-12"></div>
+</div>
 <h1>价值定义</h1>
 <hr>
-<form id="form_price" class="row g-3">
+<form id="form_price" class="row g-3 mb-3">
     <!-- col-1 不响应；col-md-1 md响应；col-lg-1 lg响应 -->
     <div class="col-lg-1">
+        <label class="form-label" for="input_bmct4">白马醇</label>
+        <input id="input_bmct4" class="form-control input_price" type="number" step="0.1" data-itemid="30074" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_ssmkt4">三水锰矿</label>
+        <input id="input_ssmkt4" class="form-control input_price" type="number" step="0.1" data-itemid="30084" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_wsymst4">五水研磨石</label>
+        <input id="input_wsymst4" class="form-control input_price" type="number" step="0.1" data-itemid="30094" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_rma7024t4">RMA70-24</label>
+        <input id="input_rma7024t4" class="form-control input_price" type="number" step="0.1" data-itemid="30104" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_tcyyt4">提纯源岩</label>
+        <input id="input_tcyyt4" class="form-control input_price" type="number" step="0.1" data-itemid="30014" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_glzzt4">改量装置</label>
+        <input id="input_glzzt4" class="form-control input_price" type="number" step="0.1" data-itemid="30064" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_jszkt4">聚酸酯块</label>
+        <input id="input_jszkt4" class="form-control input_price" type="number" step="0.1" data-itemid="30034" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_tjkt4">糖聚块</label>
+        <input id="input_tjkt4" class="form-control input_price" type="number" step="0.1" data-itemid="30024" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_ytkt4">异铁块</label>
+        <input id="input_ytkt4" class="form-control input_price" type="number" step="0.1" data-itemid="30044" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_tzlt4">酮阵列</label>
+        <input id="input_tzlt4" class="form-control input_price" type="number" step="0.1" data-itemid="30054" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_jhnjt4">聚合凝胶</label>
+        <input id="input_jhnjt4" class="form-control input_price" type="number" step="0.1" data-itemid="31014" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_chjkt4">炽合金块</label>
+        <input id="input_chjkt4" class="form-control input_price" type="number" step="0.1" data-itemid="31024" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_jtdlt4">晶体电路</label>
+        <input id="input_jtdlt4" class="form-control input_price" type="number" step="0.1" data-itemid="31034" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_jlrjt4">精炼溶剂</label>
+        <input id="input_jlrjt4" class="form-control input_price" type="number" step="0.1" data-itemid="31044" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_qxyyt4">切削原液</label>
+        <input id="input_qxyyt4" class="form-control input_price" type="number" step="0.1" data-itemid="31054" disabled>
+    </div>
+    <div class="col-lg-12"></div>
+    <div class="col-lg-1">
         <label class="form-label" for="input_nzct3">扭转醇</label>
-        <input id="input_nzct3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_nzct3" class="form-control input_price" type="number" step="0.1" data-itemid="30073">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_qmkt3">轻锰矿</label>
-        <input id="input_qmkt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_qmkt3" class="form-control input_price" type="number" step="0.1" data-itemid="30083">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_ymst3">研磨石</label>
-        <input id="input_ymst3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_ymst3" class="form-control input_price" type="number" step="0.1" data-itemid="30093">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_rma7012t3">RMA70-12</label>
-        <input id="input_rma7012t3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_rma7012t3" class="form-control input_price" type="number" step="0.1" data-itemid="30103">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_gyyzt3">固源岩组</label>
-        <input id="input_gyyzt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_gyyzt3" class="form-control input_price" type="number" step="0.1" data-itemid="30013">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_qxzzt3">全新装置</label>
-        <input id="input_qxzzt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_qxzzt3" class="form-control input_price" type="number" step="0.1" data-itemid="30063">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_jszzt3">聚酸酯组</label>
-        <input id="input_jszzt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_jszzt3" class="form-control input_price" type="number" step="0.1" data-itemid="30033">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_tzt3">糖组</label>
-        <input id="input_tzt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_tzt3" class="form-control input_price" type="number" step="0.1" data-itemid="30023">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_ytzt3">异铁组</label>
-        <input id="input_ytzt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_ytzt3" class="form-control input_price" type="number" step="0.1" data-itemid="30043">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_tnjzt3">酮凝集组</label>
-        <input id="input_tnjzt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_tnjzt3" class="form-control input_price" type="number" step="0.1" data-itemid="30053">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_njt3">凝胶</label>
-        <input id="input_njt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_njt3" class="form-control input_price" type="number" step="0.1" data-itemid="31013">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_chjt3">炽合金</label>
-        <input id="input_chjt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_chjt3" class="form-control input_price" type="number" step="0.1" data-itemid="31023">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_jtyjt3">晶体元件</label>
-        <input id="input_jtyjt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_jtyjt3" class="form-control input_price" type="number" step="0.1" data-itemid="31033">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_bzrrjt3">半自然溶剂</label>
-        <input id="input_bzrrjt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_bzrrjt3" class="form-control input_price" type="number" step="0.1" data-itemid="31043">
     </div>
     <div class="col-lg-1">
         <label class="form-label" for="input_hhqxyt3">化合切削液</label>
-        <input id="input_hhqxyt3" class="form-control input_price" type="number" step="0.1">
+        <input id="input_hhqxyt3" class="form-control input_price" type="number" step="0.1" data-itemid="31053">
     </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">提交</button>
+    <div class="col-lg-12"></div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_gyyt2">固源岩</label>
+        <input id="input_gyyt2" class="form-control input_price" type="number" step="0.1" data-itemid="30012" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_zzt2">装置</label>
+        <input id="input_zzt2" class="form-control input_price" type="number" step="0.1" data-itemid="30062" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_jszt2">聚酸酯</label>
+        <input id="input_jszt2" class="form-control input_price" type="number" step="0.1" data-itemid="30032" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_tt2">糖</label>
+        <input id="input_tt2" class="form-control input_price" type="number" step="0.1" data-itemid="30022" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_ytt2">异铁</label>
+        <input id="input_ytt2" class="form-control input_price" type="number" step="0.1" data-itemid="30042" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_tnjt2">酮凝集</label>
+        <input id="input_tnjt2" class="form-control input_price" type="number" step="0.1" data-itemid="30052" disabled>
+    </div>
+    <div class="col-lg-12"></div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_yyt1">源岩</label>
+        <input id="input_yyt1" class="form-control input_price" type="number" step="0.1" data-itemid="30011" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_pszzt1">破损装置</label>
+        <input id="input_pszzt1" class="form-control input_price" type="number" step="0.1" data-itemid="30061" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_zylt1">酯原料</label>
+        <input id="input_zylt1" class="form-control input_price" type="number" step="0.1" data-itemid="30031" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_dtt1">代糖</label>
+        <input id="input_dtt1" class="form-control input_price" type="number" step="0.1" data-itemid="30021" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_ytspt1">异铁碎片</label>
+        <input id="input_ytspt1" class="form-control input_price" type="number" step="0.1" data-itemid="30041" disabled>
+    </div>
+    <div class="col-lg-1">
+        <label class="form-label" for="input_stt1">双酮</label>
+        <input id="input_stt1" class="form-control input_price" type="number" step="0.1" data-itemid="30051" disabled>
     </div>
 </form>
+<h1>操作</h1>
+<hr>
+<div class="row g-3 mb-3">
+    <div class="col-12 d-grid gap-3 mx-auto">
+        <button id="button_refresh" type="button" class="btn btn-primary">刷新</button>
+        <button id="button_submit" type="button" class="btn btn-danger">提交</button>
+    </div>
+</div>
+<h1>结果报表</h1>
+<hr>
+<div class="row g-3">
+    <div class="col-lg-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">关卡</th>
+                <th scope="col">主要掉落</th>
+                <th scope="col">价值</th>
+            </tr>
+            </thead>
+            <tbody id="tbody_report"></tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
