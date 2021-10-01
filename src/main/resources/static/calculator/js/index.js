@@ -100,8 +100,6 @@
         };
         // 提交运算，并渲染结果
         context.getFullReport = function (control, data) {
-            console.log("data:");
-            console.log(data);
             $("#tbody_report").empty();
             $.ajax({
                 "url": "/calculator/getFullReport",
@@ -130,6 +128,7 @@
             });
         };
         // ++++++++++++++++++++++++++++++++ CONTEXT执行区 ++++++++++++++++++++++++++++++++
+        context.alert("歌词酱！");
         context.loadAllPrices();
         // ++++++++++++++++++++++++++++++++ CONTEXT事件区 ++++++++++++++++++++++++++++++++
         // 刷新
