@@ -91,7 +91,8 @@ public class CalculatorServiceImpl implements CalculatorService {
         Map<String, List<Item>> stageItemListMap = new HashMap<>(32);
         for (Matrix matrix : matrixList) {
             int times = matrix.getTimes();
-            if (times < 1) {
+            // 如果刷的次数不足200，那么不计入（样本数太少）
+            if (times < 200) {
                 continue;
             }
             String stageId = matrix.getStageId();

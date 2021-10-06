@@ -19,6 +19,12 @@
         context.enable = function (control) {
             control.prop("disabled", false);
         };
+        context.hide = function (control) {
+            control.hide();
+        };
+        context.show = function (control) {
+            control.show();
+        };
         // 加载所有的价值
         context.loadAllPrices = function () {
             $.ajax({
@@ -112,7 +118,7 @@
                     if (resp) {
                         for (var i0 = 0; i0 < resp.length; i0 ++) {
                             var report = resp[i0];
-                            var row = "<tr><th scope=\"row\">" + (i0 + 1) + "</th><td>" + report["stageName"] + "</td><td>" + report["mainItemName"] + "</td><td>" + Number(report["totalValue"]).toFixed(1) + "</td></tr>";
+                            var row = "<tr class='tr_result_row' data-itemid='" + report["mainItemId"] + "'><th scope=\"row\">" + (i0 + 1) + "</th><td>" + report["stageName"] + "</td><td>" + report["mainItemName"] + "</td><td>" + Number(report["totalValue"]).toFixed(1) + "</td></tr>";
                             tbody.append(row);
                         }
                     } else {
@@ -124,11 +130,32 @@
                 },
                 "complete": function () {
                     context.enable(control);
+                    context.show($("#form_filter"));
                 }
             });
         };
+        // 执行结果过滤
+        context.filterResult = function (itemIdArr) {
+            var rowList = $("#tbody_report").find(".tr_result_row");
+            context.hide(rowList);
+            // 如果传入空数组，就不用麻烦了
+            if (itemIdArr.length > 0) {
+                for (var l = 0; l < rowList.length; l ++) {
+                    var row = $($(rowList[l]));
+                    var rowMainItemIds = String(row.data("itemid")).split(",");
+                    for (var m = 0; m < rowMainItemIds.length; m ++) {
+                        var rowMainItemId = rowMainItemIds[m];
+                        if (itemIdArr.indexOf(rowMainItemId) > -1) {
+                            context.show(row);
+                        }
+                    }
+                }
+            }
+        };
         // ++++++++++++++++++++++++++++++++ CONTEXT执行区 ++++++++++++++++++++++++++++++++
         context.alert("冀ICP备17024835号-1 © 歌词酱");
+        var formFilterDom = $("#form_filter");
+        context.hide(formFilterDom);
         context.loadAllPrices();
         // ++++++++++++++++++++++++++++++++ CONTEXT事件区 ++++++++++++++++++++++++++++++++
         // 刷新
@@ -139,6 +166,7 @@
         $("#button_submit").on("click", function () {
             var control = $(this);
             context.disable(control);
+            context.hide($("#form_filter"));
             context.calcT1T2T4();
             var inputList = $("#form_price").find(".input_price");
             var data = {};
@@ -147,6 +175,20 @@
                 data[inputDom.data("itemid")] = inputDom.val();
             }
             context.getFullReport(control, data);
+        });
+        // 结果报表过滤
+        formFilterDom.find(".checkbox_filter").off("click").on("click", function () {
+            var checked = formFilterDom.find(".checkbox_filter:checked");
+            var itemIdArr = [];
+            for (var k = 0; k < checked.length; k ++) {
+                itemIdArr.push($(checked[k]).val());
+            }
+            context.filterResult(itemIdArr);
+        });
+        // 清空过滤
+        $("#btn_clear_filter").on("click", function () {
+            formFilterDom.find(".checkbox_filter").prop("checked", false);
+            context.filterResult([]);
         });
     });
 })(jQuery);
