@@ -121,6 +121,8 @@
                             var row = "<tr class='tr_result_row' data-itemid='" + report["mainItemId"] + "'><th scope=\"row\">" + (i0 + 1) + "</th><td>" + report["stageName"] + "</td><td>" + report["mainItemName"] + "</td><td>" + Number(report["totalValue"]).toFixed(1) + "</td></tr>";
                             tbody.append(row);
                         }
+                        context.show($("#form_filter"));
+                        context.filterResult(context.getCheckedFilter());
                     } else {
                         context.alert("数据加载失败");
                     }
@@ -130,9 +132,17 @@
                 },
                 "complete": function () {
                     context.enable(control);
-                    context.show($("#form_filter"));
                 }
             });
+        };
+        // 检查结果过滤勾了的复选框
+        context.getCheckedFilter = function () {
+            var checked = formFilterDom.find(".checkbox_filter:checked");
+            var itemIdArr = [];
+            for (var k = 0; k < checked.length; k ++) {
+                itemIdArr.push($(checked[k]).val());
+            }
+            return itemIdArr;
         };
         // 执行结果过滤
         context.filterResult = function (itemIdArr) {
@@ -178,12 +188,7 @@
         });
         // 结果报表过滤
         formFilterDom.find(".checkbox_filter").off("click").on("click", function () {
-            var checked = formFilterDom.find(".checkbox_filter:checked");
-            var itemIdArr = [];
-            for (var k = 0; k < checked.length; k ++) {
-                itemIdArr.push($(checked[k]).val());
-            }
-            context.filterResult(itemIdArr);
+            context.filterResult(context.getCheckedFilter());
         });
         // 清空过滤
         $("#btn_clear_filter").on("click", function () {
