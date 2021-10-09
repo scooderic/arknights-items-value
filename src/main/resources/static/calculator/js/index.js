@@ -191,9 +191,14 @@
             context.filterResult(context.getCheckedFilter());
         });
         // 清空过滤
-        $("#btn_clear_filter").on("click", function () {
+        $("#button_filter_clear").on("click", function () {
             formFilterDom.find(".checkbox_filter").prop("checked", false);
             context.filterResult([]);
+        });
+        // 全选过滤
+        $("#button_filter_select_all").on("click", function () {
+            formFilterDom.find(".checkbox_filter").prop("checked", true);
+            context.filterResult(context.getCheckedFilter());
         });
     });
 })(jQuery);
