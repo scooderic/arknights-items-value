@@ -157,6 +157,8 @@ public class CalculatorServiceImpl implements CalculatorService {
      * 将以关卡分组的掉落物列表，转化为结果（关卡总价值）报表
      */
     private List<Report> convertStageItemListMapToReportList(Map<String, List<Item>> stageItemListMap) throws Exception {
+        logger.info("转化结果报表开始");
+        long start = System.currentTimeMillis();
         List<Report> reportList = new ArrayList<>(50);
         Set<Map.Entry<String, List<Item>>> entrySet = stageItemListMap.entrySet();
         for (Map.Entry<String, List<Item>> entry : entrySet) {
@@ -200,11 +202,15 @@ public class CalculatorServiceImpl implements CalculatorService {
                 if (isPermStage(stageId)) {
                     stageName += " (常驻)";
                 }
+                if (isRepStage(stageId)) {
+                    stageName += " (复刻)";
+                }
                 report.setStageName(stageName);
             }
             report.setTotalValue(totalValue);
             reportList.add(report);
         }
+        logger.info("转化结果报表完成，耗时：{} ms", (System.currentTimeMillis() - start));
         return reportList;
     }
 
@@ -212,6 +218,27 @@ public class CalculatorServiceImpl implements CalculatorService {
      * 判断是否为常驻活动关卡（插曲/别传）
      */
     private boolean isPermStage(String stageId) {
-        return StringUtils.endsWith(stageId, "perm");
+        char c = stageId.charAt(stageId.length() - 1);
+        if (c == 'm') {
+            // 目前只有常驻活动会以m结尾，简化判断（2021-10-15）
+            return true;
+            // 正常判断
+            // return StringUtils.endsWith(stageId, "perm");
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否为活动复刻关卡
+     */
+    private boolean isRepStage(String stageId) {
+        char c = stageId.charAt(stageId.length() - 1);
+        if (c == 'p') {
+            // 目前只有活动复刻会以p结尾，简化判断（2021-10-15）
+            return true;
+            // 正常判断
+            // return StringUtils.endsWith(stageId, "rep");
+        }
+        return false;
     }
 }
