@@ -201,8 +201,7 @@ public class CalculatorServiceImpl implements CalculatorService {
                 String stageName = MapUtils.getString(stageDetail, "code", stageId);
                 if (isPermStage(stageId)) {
                     stageName += " (常驻)";
-                }
-                if (isRepStage(stageId)) {
+                } else if (isRepStage(stageId)) {
                     stageName += " (复刻)";
                 }
                 report.setStageName(stageName);
